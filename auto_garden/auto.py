@@ -194,6 +194,8 @@ def secret_garden():
         else:
             plant = plant3_finish
         count_plant_finish, loc_plant_finish, screen = find_oject(screen, plant, t)
+        if total_harvest > 1 and total_harvest < 6:
+            t = t - 0.005
         if count_plant_finish > 0:
             print("harvest:" + str(count_plant_finish))
             c, loc_big_harvest, screen = find_oject(screen, big_harvest, 0.75)
@@ -203,8 +205,6 @@ def secret_garden():
                 mouse(pt[0], pt[1], w, h)
             total_harvest = total_harvest + count_plant_finish
             print(total_harvest)
-            if total_harvest > 1 and total_harvest< 6:
-                t = t - 0.05
             if total_harvest >= 6:
                 print("seed1 finish: " + str(count_seed1))
                 have_plant = False
