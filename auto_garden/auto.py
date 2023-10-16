@@ -101,6 +101,7 @@ def normal_garden():
                 py.mouseUp()
 
         #掃塵
+        screen = ImageGrab.grab()
         count_clear, loc_small_clear, screen= find_oject(screen, small_clear, 0.75)
         if count_clear > 0:
             print("clear:" + str(count_clear))
@@ -111,6 +112,7 @@ def normal_garden():
                 mouse(pt[0], pt[1], -w, h)
 
         #施肥
+        screen = ImageGrab.grab()
         count_fertilize, loc_small_fertilize, screen= find_oject(screen, small_fertilize, 0.75)
         if count_fertilize > 0:
             print("fertilize:" + str(count_fertilize))
@@ -133,8 +135,8 @@ def secret_garden():
         # 沒有植物
         if have_plant == False:
             if count_seed1 < 1:
-                seed = seed3
-                sown = sowing3
+                seed = seed1
+                sown = sowing1
                 count_seed1 = count_seed1 + 1
                 print("seed1 start: " + str(count_seed1))
             else:
