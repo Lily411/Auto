@@ -66,11 +66,13 @@ def sowing(seed, sown, h1):
     count = 0
     x, y = py.position()
     x1 = x - 80
+    x2 = 0
     y1 = y + h1
+    t = 0.87
     while count < 3:
         py.moveTo( x1+1,  y1)
         screen = ImageGrab.grab()
-        count_sowing1, loc_sowing1, screen = find_oject(screen, sown, 0.86)
+        count_sowing1, loc_sowing1, screen = find_oject(screen, sown, t)
         if count_sowing1 > 0:
             py.click()
             py.mouseUp()
@@ -78,7 +80,12 @@ def sowing(seed, sown, h1):
             x1 = py.position()[0]
             shop(seed)
             continue
-        x1 = x1 + 1
+        if x2 > x + 300 :
+            x1 = x1 - 1
+            t = 0.865
+        else:
+            x1 = x1 + 1
+            x2 = x1
 
     return count
 
@@ -135,8 +142,8 @@ def secret_garden():
         # 沒有植物
         if have_plant == False:
             if count_seed1 < 1:
-                seed = seed1
-                sown = sowing1
+                seed = seed3
+                sown = sowing3
                 count_seed1 = count_seed1 + 1
                 print("seed1 start: " + str(count_seed1))
             else:
@@ -158,7 +165,7 @@ def secret_garden():
 
         # 澆水
         screen = ImageGrab.grab()
-        print("find water" + str(i))
+        print("find water: " + str(i))
         count_water, loc_small_water, screen = find_oject(screen, small_water, 0.75)
         if count_water > 0:
             print("water:" + str(count_water))
@@ -176,7 +183,7 @@ def secret_garden():
 
         # 施肥
         screen = ImageGrab.grab()
-        print("find fertilize"+ str(i))
+        print("find fertilize: "+ str(i))
         count_fertilize, loc_small_fertilize, screen = find_oject(screen, small_fertilize, 0.75)
         if count_fertilize > 0:
             print("fertilize:" + str(count_fertilize))
@@ -190,7 +197,7 @@ def secret_garden():
 
         # 收割
         screen = ImageGrab.grab()
-        print("find harvest"+str(i)+"t="+str(t))
+        print("find harvest: "+str(i)+", t="+str(t))
         if seed == seed1:
             plant = plant1_finish
         else:
