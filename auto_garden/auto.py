@@ -52,7 +52,7 @@ def shop(seed):
         count_shop, loc_shop, screen = find_oject(screen, shop1, 0.95)
         if count_shop > 0:
             for pt in zip(*loc_shop[::-1]):
-                mouse(pt[0], pt[1], w, h)
+                mouse(pt[0], pt[1], w, 0.5*h+h)
 
         time.sleep(2)
         screen = ImageGrab.grab()
@@ -70,7 +70,7 @@ def sowing(seed, sown, h1):
     while count < 3:
         py.moveTo( x1+1,  y1)
         screen = ImageGrab.grab()
-        count_sowing1, loc_sowing1, screen = find_oject(screen, sown, 0.88)
+        count_sowing1, loc_sowing1, screen = find_oject(screen, sown, 0.86)
         if count_sowing1 > 0:
             py.click()
             py.mouseUp()
@@ -126,12 +126,15 @@ def secret_garden():
     have_plant = False
     count_seed1 = 0
     total_harvest = 0
+    t = 0.75 #for harvest
+    i = 0
     while True:
+        i = i +1
         # 沒有植物
         if have_plant == False:
             if count_seed1 < 1:
-                seed = seed1
-                sown = sowing1
+                seed = seed3
+                sown = sowing3
                 count_seed1 = count_seed1 + 1
                 print("seed1 start: " + str(count_seed1))
             else:
@@ -153,6 +156,7 @@ def secret_garden():
 
         # 澆水
         screen = ImageGrab.grab()
+        print("find water" + str(i))
         count_water, loc_small_water, screen = find_oject(screen, small_water, 0.75)
         if count_water > 0:
             print("water:" + str(count_water))
@@ -170,6 +174,7 @@ def secret_garden():
 
         # 施肥
         screen = ImageGrab.grab()
+        print("find fertilize"+ str(i))
         count_fertilize, loc_small_fertilize, screen = find_oject(screen, small_fertilize, 0.75)
         if count_fertilize > 0:
             print("fertilize:" + str(count_fertilize))
@@ -183,11 +188,12 @@ def secret_garden():
 
         # 收割
         screen = ImageGrab.grab()
+        print("find harvest"+str(i)+"t="+str(t))
         if seed == seed1:
             plant = plant1_finish
         else:
             plant = plant3_finish
-        count_plant_finish, loc_plant_finish, screen = find_oject(screen, plant, 0.85)
+        count_plant_finish, loc_plant_finish, screen = find_oject(screen, plant, t)
         if count_plant_finish > 0:
             print("harvest:" + str(count_plant_finish))
             c, loc_big_harvest, screen = find_oject(screen, big_harvest, 0.75)
@@ -196,16 +202,20 @@ def secret_garden():
             for pt in zip(*loc_plant_finish[::-1]):
                 mouse(pt[0], pt[1], w, h)
             total_harvest = total_harvest + count_plant_finish
+            print(total_harvest)
+            if total_harvest > 1 and total_harvest< 6:
+                t = t - 0.05
             if total_harvest >= 6:
                 print("seed1 finish: " + str(count_seed1))
                 have_plant = False
                 total_harvest = 0
+                t = 0.75
 
         time.sleep(1)
 
 if __name__ == "__main__":
-    normal_garden()
-    #secret_garden()
+    #normal_garden()
+    secret_garden()
 
 
 
