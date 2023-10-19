@@ -1,4 +1,4 @@
-# Auto
+# Automated program
 ## Introduction:
 Many people are using program to play games automatically. I am striving to develop an automated program for the dancing game that I used to enjoy during my childhood. In this game, players need to press the arrow keys at specific intervals. Once all the arrows have been pressed, players must press the space or control key to obtain a score at a specific location.
 
