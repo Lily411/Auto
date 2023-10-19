@@ -7,3 +7,6 @@ In my automated program, I mainly rely on the Python library OpenCV. The program
 
 ## Performance
 However, the performance of the program is not satisfactory. Firstly, there are instances where the program fails to recognize the arrows. Secondly, the program struggles to keep up with varying game speeds. In cases where the speed is too fast, the program lacks sufficient time to identify and press all the necessary keys within the specified timeframe.
+
+## Solution
+still thinking....
